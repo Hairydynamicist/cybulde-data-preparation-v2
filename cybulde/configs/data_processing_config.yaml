@@ -10,4 +10,4 @@ hydra:
   run:
     dir: .
 
-version: v1
+version: v3
