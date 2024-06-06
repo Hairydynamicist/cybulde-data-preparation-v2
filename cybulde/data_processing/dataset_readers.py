@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 from cybulde.utils.utils import get_logger
+from dask_ml.model_selection import train_test_split
 import dask.dataframe as dd
 import os
+
 
 class DatasetReader(ABC):
     required_columns = {"text", "label", "split", "dataset_name"}
@@ -35,6 +37,23 @@ class DatasetReader(ABC):
         test_df["split"] = "test"
         return dd.concat([train_df, dev_df, test_df])
     
+    def split_dataset(self, df:dd.core.dataframe, test_size: float, stratify_column: Optional[str] = None) -> tuple;
+        if stratify_column is None:
+            return train_test_split(df, test_size=test_size, random_state=1234, shuffle=true)
+        unique_column_values = df[stratify_column].unique()
+        first_dfs = []
+        second_dfs = []
+        for unique_set_value in unique_column_values:
+            sub_df = df[df[stratify_column] == unique_set_value]
+            sub_first_df, sub_second_df = train_test_split(sub_df, test_size=test_size, random_state=1234, shuffle=True)
+            first_dfs.append(sub_first_df)
+            second_dfs.append(second_dfs)
+        
+        first_df = dd.concat(first_dfs)
+        second_df = dd.concat(second_dfs)
+        return first_df, second_df
+
+    
 class GHCDatasetReader(DatasetReader):
     def __init__(self, dataset_dir: str, dataset_name: str, dev_split_ratio: float) -> None:
         super().__init__(dataset_dir, dataset_name)
@@ -52,4 +71,6 @@ class GHCDatasetReader(DatasetReader):
         test_df["label"] = (test_df["hd"] + test_df["cv"] + test_df["vo"] > 0).astype(int)
 
         train_df, dev_df = self.split_dataset(train_df, self.dev_split_ratio, stratify_column="label")
+
+        return train_df, dev_df, test_df
 
