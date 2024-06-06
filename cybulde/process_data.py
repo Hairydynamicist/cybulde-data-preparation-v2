@@ -8,6 +8,7 @@ from cybulde.utils.data_utils import get_raw_data_with_version
 def process_data(config: DataProcessingConfig) -> None:
     print(config)
     from omegaconf import OmegaConf
+    print(60*"#")
     print(OmegaConf.to_yaml(config))
 
     return

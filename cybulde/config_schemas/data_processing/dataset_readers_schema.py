@@ -20,5 +20,9 @@ class DatasetReaderManagerConfig:
     dataset_readers: dict[str, DatasetReaderConfig] = MISSING
 
 def setup_config() -> None:
-    cs = ConfigStore.instance() 
-    cs.store(name="ghc_dataset_reader_schema", node=DatasetReaderManagerConfig, group="dataset_reader_manager")
+    cs = ConfigStore.instance()
+    cs.store(name="dataset_reader_manager_schema", node=DatasetReaderManagerConfig, group="dataset_reader_manager")
+
+    cs.store(
+        name="ghc_dataset_reader_schema", node=GHCDatasetReaderConfig, group="dataset_reader_manager/dataset_reader"
+    )
