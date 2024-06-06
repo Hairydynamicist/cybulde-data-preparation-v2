@@ -9,14 +9,13 @@ class DataProcessingConfig:
     version: str = MISSING 
     data_local_save_dir: str = "./data/raw"
     dvc_remote_repo: str = "https://github.com/Hairydynamicist/cybulde-data-v2.git"
-    dvc_remote_repo: str = "https://github.com/Hairydynamicist/cybulde-data-v2.git"
     dvc_data_folder: str = "data/raw"
     github_user_name: str = "hairydynamicist"
     github_access_token_scret_id: str = "cybulde-data-github-access-token"
     
     infrastructure: gcp_schema.GCPConfig = gcp_schema.GCPConfig()
 
-    dataset_reader_manager: dataset_readers_schema.DatasetReaderConfig = MISSING
+    dataset_reader_manager: dataset_readers_schema.DatasetReaderManagerConfig = MISSING
 
 
 def setup_config() -> None:

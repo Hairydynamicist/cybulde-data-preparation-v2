@@ -37,7 +37,7 @@ class DatasetReader(ABC):
         test_df["split"] = "test"
         return dd.concat([train_df, dev_df, test_df])
     
-    def split_dataset(self, df:dd.core.dataframe, test_size: float, stratify_column: Optional[str] = None) -> tuple;
+    def split_dataset(self, df:dd.core.dataframe, test_size: float, stratify_column: Optional[str] = None) -> tuple:
         if stratify_column is None:
             return train_test_split(df, test_size=test_size, random_state=1234, shuffle=true)
         unique_column_values = df[stratify_column].unique()
@@ -76,7 +76,7 @@ class GHCDatasetReader(DatasetReader):
     
 
 class DatasetReaderManager:
-    def __init__(self, dataset_readers) -> None:
+    def __init__(self, dataset_readers: dict[str, DatasetReader]) -> None:
         self.dataset_readers = dataset_readers
 
     def read_Data(self) -> dd.core.dataframe:

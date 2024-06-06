@@ -1,4 +1,4 @@
-from hydra.core.config_store import config_store
+from hydra.core.config_store import ConfigStore
 from pydantic.dataclasses import dataclass
 from omegaconf import MISSING
 
@@ -17,7 +17,8 @@ class GHCDatasetReaderConfig(DatasetReaderConfig):
 @dataclass
 class DatasetReaderManagerConfig:
     _target_ = "cybulde.data_processing.dataset_readers.GHCReaderManager"
+    dataset_readers: dict[str, DatasetReaderConfig] = MISSING
 
-    def setup_config() -> None:
-        cs = ConfigStore.instance() 
-        cs.store(name="ghc_dataset_reader_schema", node=DatasetReaderManagerConfig, group="dataset_reader_manager")
+def setup_config() -> None:
+    cs = ConfigStore.instance() 
+    cs.store(name="ghc_dataset_reader_schema", node=DatasetReaderManagerConfig, group="dataset_reader_manager")
