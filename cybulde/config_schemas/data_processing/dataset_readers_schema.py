@@ -8,6 +8,7 @@ class DatasetReaderConfig:
     dataset_dir: str = MISSING
     dataset_name: str = MISSING
 
+
 @dataclass
 class GHCDatasetReaderConfig(DatasetReaderConfig):
     _target_: str = "cybulde.data_processing.dataset_readers.GHCDatasetReader"
@@ -16,8 +17,9 @@ class GHCDatasetReaderConfig(DatasetReaderConfig):
 
 @dataclass
 class DatasetReaderManagerConfig:
-    _target_ = "cybulde.data_processing.dataset_readers.GHCReaderManager"
+    _target_: str = "cybulde.data_processing.dataset_readers.DatasetReaderManager"
     dataset_readers: dict[str, DatasetReaderConfig] = MISSING
+
 
 def setup_config() -> None:
     cs = ConfigStore.instance()

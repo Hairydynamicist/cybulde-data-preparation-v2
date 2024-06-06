@@ -17,7 +17,6 @@ class DataProcessingConfig:
 
     dataset_reader_manager: dataset_readers_schema.DatasetReaderManagerConfig = MISSING
 
-
 def setup_config() -> None:
     gcp_schema.setup_config()
     dataset_readers_schema.setup_config()
