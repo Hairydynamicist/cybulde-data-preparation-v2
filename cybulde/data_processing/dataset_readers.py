@@ -3,6 +3,7 @@ from cybulde.utils.utils import get_logger
 from dask_ml.model_selection import train_test_split
 import dask.dataframe as dd
 import os
+from typing import Optional
 
 
 class DatasetReader(ABC):
@@ -14,7 +15,7 @@ class DatasetReader(ABC):
         self.dataset_dir = dataset_dir
         self.dataset_name = dataset_name
 
-    def read_data(self) -> dd.core.dataframe:
+    def read_data(self) -> dd.core.DataFrame:
         train_df, dev_df, test_df = self._read_data()
         df = self.assign_split_names_to_data_frames_and_merge(train_df, dev_df, test_df)
         df["dataset_name"] = self.dataset_name
@@ -37,7 +38,7 @@ class DatasetReader(ABC):
         test_df["split"] = "test"
         return dd.concat([train_df, dev_df, test_df])
     
-    def split_dataset(self, df:dd.core.dataframe, test_size: float, stratify_column: Optional[str] = None) -> tuple:
+    def split_dataset(self, df:dd.core.DataFrame, test_size: float, stratify_column: Optional[str] = None) -> tuple:
         if stratify_column is None:
             return train_test_split(df, test_size=test_size, random_state=1234, shuffle=true)
         unique_column_values = df[stratify_column].unique()
@@ -82,7 +83,7 @@ class DatasetReaderManager:
     ) -> None:
         self.dataset_readers = dataset_readers
     print("found datasetreadermanager class")
-    def read_Data(self) -> dd.core.dataframe:
+    def read_Data(self) -> dd.core.DataFrame:
         dfs = [dataset_reader.read_data() for dataset_reader in self.dataset_readers.values()]
         df = dd.concat(dfs)
         return df
