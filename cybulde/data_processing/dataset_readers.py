@@ -73,4 +73,14 @@ class GHCDatasetReader(DatasetReader):
         train_df, dev_df = self.split_dataset(train_df, self.dev_split_ratio, stratify_column="label")
 
         return train_df, dev_df, test_df
+    
+
+class DatasetReaderManager:
+    def __init__(self, dataset_readers) -> None:
+        self.dataset_readers = dataset_readers
+
+    def read_Data(self) -> dd.core.dataframe:
+        dfs = [dataset_reader.read_data() for dataset_reader in self.dataset_readers.values()]
+        df = dd.concat(dfs)
+        return df
 
