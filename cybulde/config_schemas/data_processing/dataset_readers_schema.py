@@ -1,6 +1,7 @@
 from hydra.core.config_store import ConfigStore
-from pydantic.dataclasses import dataclass
 from omegaconf import MISSING
+from pydantic.dataclasses import dataclass
+
 
 @dataclass
 class DatasetReaderConfig:
@@ -43,9 +44,13 @@ def setup_config() -> None:
     )
 
     cs.store(
-        name="jtc_dataset_reader_schema", node=JigsawToxicCommentsDatasetReaderConfig, group="dataset_reader_manager/dataset_reader",
+        name="jtc_dataset_reader_schema",
+        node=JigsawToxicCommentsDatasetReaderConfig,
+        group="dataset_reader_manager/dataset_reader",
     )
 
     cs.store(
-        name="twitter_dataset_reader_schema", node=TwitterDatasetReaderConfig, group="dataset_reader_manager/dataset_reader",
+        name="twitter_dataset_reader_schema",
+        node=TwitterDatasetReaderConfig,
+        group="dataset_reader_manager/dataset_reader",
     )
