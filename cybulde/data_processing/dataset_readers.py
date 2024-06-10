@@ -92,26 +92,16 @@ class JigsawToxicCommentsDatasetReader(DatasetReader):
         dataset_dir: str,
         dataset_name: str,
         dev_split_ratio: float,
-        gcp_project_id: str,
-        gcp_github_access_token_secret_id: str,
-        dvc_remote_repo: str,
-        github_user_name: str,
-        version: str,
     ) -> None:
         super().__init__(
             dataset_dir,
             dataset_name,
-            gcp_project_id,
-            gcp_github_access_token_secret_id,
-            dvc_remote_repo,
-            github_user_name,
-            version,
         )
         self.dev_split_ratio = dev_split_ratio
         self.columns_for_label = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
 
     def _read_data(self) -> tuple[dd.core.DataFrame, dd.core.DataFrame, dd.core.DataFrame]:
-        self.logger.info(f"Reading {__self__.__class__.__name__}")
+        self.logger.info(f"Reading {self.__class__.__name__}")
         test_csv_path = os.path.join(self.dataset_dir, "test.csv")
         #test_csv_url = self.get_remote_data_url(test_csv_path)
         test_df = dd.read_csv(test_csv_path)
