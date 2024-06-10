@@ -20,9 +20,11 @@ class DatasetReader(ABC):
         train_df, dev_df, test_df = self._read_data()
         df = self.assign_split_names_to_data_frames_and_merge(train_df, dev_df, test_df)
         df["dataset_name"] = self.dataset_name
+        df = df.compute()
         if any(required_column not in df.columns.values for required_column in self.required_columns):
             raise ValueError(f"Dataset must contain all required columns: {self.required_columns}")
-        unique_split_names = set(df["split"].unique().compute().tolist())
+        unique_split_names = set(df["split"].unique().tolist()) 
+        print(unique_split_names)
         if unique_split_names != self.split_names:
             raise ValueError(f"Dataset must contain all required split names: {self.split_names}")
         final_df: dd.core.DataFrame = df[list(self.required_columns)]
@@ -50,7 +52,6 @@ class DatasetReader(ABC):
         if stratify_column is None:
             return train_test_split(df, test_size=test_size, random_state=1234, shuffle=True)  # type: ignore
         unique_column_values = df[stratify_column].unique()
-        print(unique_column_values)
         first_dfs = []
         second_dfs = []
         for unique_set_value in unique_column_values:
