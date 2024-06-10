@@ -24,7 +24,7 @@ class DatasetReader(ABC):
         train_df, dev_df, test_df = self._read_data()
         df = self.assign_split_names_to_data_frames_and_merge(train_df, dev_df, test_df)
         df["dataset_name"] = self.dataset_name
-        df = df.compute()
+        df = df.compute() # type: ignore
         if any(required_column not in df.columns.values for required_column in self.required_columns):
             raise ValueError(f"Dataset must contain all required columns: {self.required_columns}")
         unique_split_names = set(df["split"].unique().tolist())
@@ -171,5 +171,5 @@ class DatasetReaderManager:
 
     def read_data(self) -> dd.core.DataFrame:
         dfs = [dataset_reader.read_data() for dataset_reader in self.dataset_readers.values()]
-        df: dd.core.DataFrame = dd.concat(dfs)
+        df: dd.core.DataFrame = dd.concat(dfs) # type: ignore
         return df
