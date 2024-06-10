@@ -8,7 +8,9 @@ from cybulde.utils.utils import get_logger
 
 @get_config(config_path="../configs", config_name="data_processing_config")
 def process_data(config: DataProcessingConfig) -> None: 
-    print(config)
+    from omegaconf import OmegaConf
+    print(60*"#")
+    print(OmegaConf.to_yaml(config))
     return
 
     logger = get_logger(Path(__file__).name)
