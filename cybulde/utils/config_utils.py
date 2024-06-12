@@ -2,10 +2,13 @@ import logging
 import logging.config
 import argparse
 
+from io import BytesIO, StringIO
+
 from typing import Any, Optional
 
 import hydra
 import yaml
+import pickle
 
 from hydra.types import TaskFunction
 from hydra import compose, initialize
@@ -15,6 +18,7 @@ from omegaconf import DictConfig, OmegaConf
 from hydra import compose, initialize
 
 from cybulde.config_schemas import data_processing_config_schema
+from cybulde.utils.io_utils import open_file
 
 
 def get_config(config_path: str, config_name: str) -> TaskFunction:
@@ -63,3 +67,17 @@ def compose_config(config_path: str, config_name: str, overrides: Optional[list[
         dict_config = compose(config_name=config_name, overrides=overrides)
         config = OmegaConf.to_object(dict_config)
     return config
+
+
+def save_config_as_yaml(config: Any, save_path: str) -> None:
+    text_io = StringIO()
+    OmegaConf.save(config, text_io, resolve=True)
+    with open_file(save_path, "w") as f:
+        f.write(text_io.getvalue())
+
+
+def save_config_as_pickle(config: Any, save_path: str) -> None:
+    bytes_io = BytesIO()
+    pickle.dump(config, bytes_io)
+    with open_file(save_path, "wb") as f:
+        f.write(bytes_io.getvalue())
