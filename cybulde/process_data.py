@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 import dask.dataframe as dd
-from cybulde.utils.config_utils import get_config
+from cybulde.utils.config_utils import get_pickle_config
 from dask.distributed import Client
 from hydra.utils import instantiate
 
@@ -20,8 +20,12 @@ def process_raw_data(
     processed_partition: dd.core.Series = df_partition["text"].apply(dataset_cleaner_manager)
     return processed_partition
 
-@get_config(config_path="../configs", config_name="data_processing_config")
+@get_pickle_config(config_path="cybulde/configs/automatically_generated", config_name="data_processing_config")
 def process_data(config: DataProcessingConfig) -> None:
+    print(60 * "#")
+    print(config)
+    print(60 * "#")
+    return
     logger = get_logger(Path(__file__).name)
     logger.info("Processing raw data...")
     processed_data_save_dir = config.processed_data_save_dir
