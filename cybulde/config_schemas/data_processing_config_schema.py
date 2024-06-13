@@ -13,7 +13,7 @@ class DataProcessingConfig:
     dvc_remote_repo: str = "https://github.com/Hairydynamicist/cybulde-data-v2.git"
     dvc_data_folder: str = "data/raw"
     github_user_name: str = "hairydynamicist"
-    github_access_token_scret_id: str = "cybulde-data-github-access-token"
+    github_access_token_secret_id: str = "cybulde-data-github-access-token"
 
     infrastructure: gcp_schema.GCPConfig = gcp_schema.GCPConfig()
 

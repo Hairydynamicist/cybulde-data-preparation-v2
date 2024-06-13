@@ -22,10 +22,7 @@ def process_raw_data(
 
 @get_pickle_config(config_path="cybulde/configs/automatically_generated", config_name="data_processing_config")
 def process_data(config: DataProcessingConfig) -> None:
-    print(60 * "#")
-    print(config)
-    print(60 * "#")
-    return
+
     logger = get_logger(Path(__file__).name)
     logger.info("Processing raw data...")
     processed_data_save_dir = config.processed_data_save_dir
@@ -36,7 +33,7 @@ def process_data(config: DataProcessingConfig) -> None:
 
     try:
         
-        github_access_token = access_secret_version(config.infrastructure.project_id, config.github_access_token_scret_id)
+        github_access_token = access_secret_version(config.infrastructure.project_id, config.github_access_token_secret_id)
 
         get_raw_data_with_version(
             version=config.version,
@@ -46,7 +43,6 @@ def process_data(config: DataProcessingConfig) -> None:
             github_user_name=config.github_user_name,
             github_access_token=github_access_token,
         )
-        print("inside get_raw_data_with_version")
         dataset_reader_manager = instantiate(config.dataset_reader_manager)
         logger.info(f"Dataset reader manager instantiated: {dataset_reader_manager}")
         dataset_cleaner_manager = instantiate(config.dataset_cleaner_manager)
@@ -55,9 +51,9 @@ def process_data(config: DataProcessingConfig) -> None:
 
         df = dataset_reader_manager.read_data(config.dask_cluster.n_workers)
         
-        print(60*"#")
-        print(f"partitions = {df.npartitions}")
-        print(60*"#")
+        print(df.compute().head())
+
+        exit(0)
         
         logger.info("Cleaning data...")
 

@@ -1,22 +1,21 @@
+import argparse
+# import importlib
 import logging
 import logging.config
-import argparse
+import os
+import pickle
 
+# from dataclasses import asdict
+# from functools import partial
 from io import BytesIO, StringIO
-
 from typing import Any, Optional
 
 import hydra
 import yaml
-import pickle
-import os
 
+from hydra import compose, initialize
 from hydra.types import TaskFunction
-from hydra import compose, initialize
-
 from omegaconf import DictConfig, OmegaConf
-
-from hydra import compose, initialize
 
 from cybulde.config_schemas import data_processing_config_schema
 from cybulde.utils.io_utils import open_file
@@ -35,6 +34,7 @@ def get_config(config_path: str, config_name: str) -> TaskFunction:
         return decorated_main
 
     return main_decorator
+
 
 def get_pickle_config(config_path: str, config_name: str) -> TaskFunction:
     setup_config()

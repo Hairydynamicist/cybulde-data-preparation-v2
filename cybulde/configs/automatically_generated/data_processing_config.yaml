@@ -3,7 +3,7 @@ data_local_save_dir: ./data/raw
 dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
 dvc_data_folder: data/raw
 github_user_name: hairydynamicist
-github_access_token_scret_id: cybulde-data-github-access-token
+github_access_token_secret_id: cybulde-data-github-access-token
 infrastructure:
   project_id: cybuldeproject
   zone: europe-west4-b
@@ -15,16 +15,31 @@ dataset_reader_manager:
       _target_: cybulde.data_processing.dataset_readers.GHCDatasetReader
       dataset_dir: ./data/raw/ghc
       dataset_name: ghc
+      gcp_project_id: cybuldeproject
+      gcp_github_access_token_secret_id: cybulde-data-github-access-token
+      dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
+      github_user_name: hairydynamicist
+      version: v3
       dev_split_ratio: 0.3
     jtc:
       _target_: cybulde.data_processing.dataset_readers.JigsawToxicCommentsDatasetReader
       dataset_dir: ./data/raw/jigsaw-toxic-comments
       dataset_name: jtc
+      gcp_project_id: cybuldeproject
+      gcp_github_access_token_secret_id: cybulde-data-github-access-token
+      dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
+      github_user_name: hairydynamicist
+      version: v3
       dev_split_ratio: 0.06
     twitter:
       _target_: cybulde.data_processing.dataset_readers.TwitterDatasetReader
       dataset_dir: ./data/raw/twitter
       dataset_name: twitter
+      gcp_project_id: cybuldeproject
+      gcp_github_access_token_secret_id: cybulde-data-github-access-token
+      dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
+      github_user_name: hairydynamicist
+      version: v3
       dev_split_ratio: 0.25
       test_split_ratio: 0.2
   repartition: true
@@ -77,5 +92,5 @@ dask_cluster:
 processed_data_save_dir: ./data/processed
 run_tag: default_run
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 316150e0-835b-471e-a610-3ce360cc92de
+docker_image_tag: 114cb631-2c93-4683-a572-71da0af1010f
 min_nrof_words: 2
