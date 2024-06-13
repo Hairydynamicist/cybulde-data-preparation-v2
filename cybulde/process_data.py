@@ -12,6 +12,7 @@ from cybulde.config_schemas.data_processing_config_schema import DataProcessingC
 from cybulde.utils.utils import get_logger
 from cybulde.utils.gcp_utils import access_secret_version
 from cybulde.utils.data_utils import get_raw_data_with_version
+from cybulde.utils.config_utils import custom_instantiate
 
 
 def process_raw_data(
@@ -27,7 +28,7 @@ def process_data(config: DataProcessingConfig) -> None:
     logger.info("Processing raw data...")
     processed_data_save_dir = config.processed_data_save_dir
 
-    cluster = instantiate(config.dask_cluster)
+    cluster = custom_instantiate(config.dask_cluster)
     client = Client(cluster)
 
 
