@@ -92,5 +92,5 @@ dask_cluster:
 processed_data_save_dir: ./data/processed
 run_tag: default_run
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 114cb631-2c93-4683-a572-71da0af1010f
+docker_image_tag: 64049e82-4155-4613-8477-08ca479b04f4
 min_nrof_words: 2
