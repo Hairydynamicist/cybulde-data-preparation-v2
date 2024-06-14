@@ -20,6 +20,10 @@ def open_file(path: str, mode: str = "r") -> Any:
     file_system = choose_file_system(path)
     return file_system.open(path, mode)
 
+def write_yaml_file(yaml_file_path: str, yaml_file_content: dict[Any, Any]) -> None:
+    with open_file(yaml_file_path, "w") as yaml_file:
+        yaml.dump(yaml_file_content, yaml_file)
+
 
 def write_yaml_file(yaml_file_path: str, yaml_file_content: dict[Any, Any]) -> None:
     with open_file(yaml_file_path, "w") as yaml_file:

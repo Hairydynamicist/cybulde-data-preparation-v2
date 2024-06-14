@@ -6,7 +6,7 @@ github_user_name: hairydynamicist
 github_access_token_secret_id: cybulde-data-github-access-token
 infrastructure:
   project_id: cybuldeproject
-  zone: europe-west4-b
+  zone: europe-west4-a
   network: default
 dataset_reader_manager:
   _target_: cybulde.data_processing.dataset_readers.DatasetReaderManager
@@ -77,12 +77,12 @@ dask_cluster:
   _target_: dask_cloudprovider.gcp.GCPCluster
   n_workers: 3
   projectid: cybuldeproject
-  zone: europe-west4-b
+  zone: europe-west4-a
   network: default
   network_projectid: cybuldeproject
   machine_type: n1-standard-1
   source_image: projects/ubuntu-os-cloud/global/images/ubuntu-minimal-2004-focal-v20220203
-  docker_image: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing:c123c3e8-a1c4-4746-a12c-586bb6ea8ae2
+  docker_image: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing:3662994e-83d9-4604-bfba-b4490c5f84fe
   docker_args: '--log-driver=gcplogs
 
     '
@@ -104,8 +104,8 @@ dask_cluster:
   preemptible: false
   debug: false
   instance_labels: null
-processed_data_save_dir: ./data/processed
+processed_data_save_dir: gs://jmcybulde/data/processed/default_run
 run_tag: default_run
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: c123c3e8-a1c4-4746-a12c-586bb6ea8ae2
+docker_image_tag: 3662994e-83d9-4604-bfba-b4490c5f84fe
 min_nrof_words: 2

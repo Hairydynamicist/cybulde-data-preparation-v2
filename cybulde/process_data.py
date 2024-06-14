@@ -13,6 +13,7 @@ from cybulde.utils.utils import get_logger
 from cybulde.utils.gcp_utils import access_secret_version
 from cybulde.utils.data_utils import get_raw_data_with_version
 from cybulde.utils.config_utils import custom_instantiate
+from cybulde.utils.io_utils import write_yaml_file
 
 
 def process_raw_data(
@@ -44,9 +45,6 @@ def process_data(config: DataProcessingConfig) -> None:
 
         df = dataset_reader_manager.read_data(config.dask_cluster.n_workers)
 
-        print(df.compute().head())
-        exit(0)
-        
         logger.info("Cleaning data...")
 
         df = df.assign(
@@ -76,10 +74,10 @@ def process_data(config: DataProcessingConfig) -> None:
         #dev_df.to_parquet(dev_parquet_path)
         #test_df.to_parquet(test_parquet_path)
 
-        #docker_info = {"docker_image": config.docker_image_name, "docker_tag": config.docker_image_tag}
-        #docker_info_save_path = os.path.join(processed_data_save_dir, "docker_info.yaml")
+        docker_info = {"docker_image": config.docker_image_name, "docker_tag": config.docker_image_tag}
+        docker_info_save_path = os.path.join(processed_data_save_dir, "docker_info.yaml")
 
-        #write_yaml_file(docker_info_save_path, docker_info)
+        write_yaml_file(docker_info_save_path, docker_info)
 
         logger.info("Data processing finished!")
 
