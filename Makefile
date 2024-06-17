@@ -49,6 +49,10 @@ process-data: generate-final-data-processing-config push
 train-tokenizer: generate-final-tokenizer-training-config push
 	$(DOCKER_COMPOSE_EXEC) python ./cybulde/train_tokenizer.py
 
+## Train a tokenizer locally
+local-train-tokenizer: generate-final-tokenizer-training-config
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/train_tokenizer.py
+
 ## Processes raw data
 local-process-data: generate-final-data-processing-config
 	$(DOCKER_COMPOSE_EXEC) python ./cybulde/process_data.py
