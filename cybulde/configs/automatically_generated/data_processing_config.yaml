@@ -30,7 +30,7 @@ dataset_reader_manager:
       dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
       github_user_name: hairydynamicist
       version: v3
-      dev_split_ratio: 0.06
+      dev_split_ratio: 0.03
     twitter:
       _target_: cybulde.data_processing.dataset_readers.TwitterDatasetReader
       dataset_dir: ./data/raw/twitter
@@ -40,7 +40,7 @@ dataset_reader_manager:
       dvc_remote_repo: https://github.com/Hairydynamicist/cybulde-data-v2.git
       github_user_name: hairydynamicist
       version: v3
-      dev_split_ratio: 0.25
+      dev_split_ratio: 0.125
       test_split_ratio: 0.1
   repartition: true
   available_memory: 3750000000.0
@@ -93,5 +93,5 @@ dask_cluster:
 processed_data_save_dir: gs://jmcybulde/data/processed/default_run
 run_tag: default_run
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 6ef8d24c-f4eb-4682-90bf-aeed1e0df8c3
+docker_image_tag: 0c3fd5e3-7502-4549-b6c6-98c51660e099
 min_nrof_words: 2
