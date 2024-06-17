@@ -15,11 +15,11 @@ from cybulde.utils.utils import get_logger
 @get_pickle_config(config_path="cybulde/configs/automatically_generated", config_name="tokenizer_training_config")
 def train_tokenizer(config: TokenizerTrainingConfig) -> None:
     logger = get_logger(Path(__file__).name)
-    print(config)
-    exit(0)
 
     data_parquet_path = config.data_parquet_path
     text_column_name = config.text_column_name
+
+    df=pd.read_parquet(data_parquet_path)
 
     tokenizer = instantiate(config.tokenizer, _convert_="all")
 

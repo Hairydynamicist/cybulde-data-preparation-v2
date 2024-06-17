@@ -2,7 +2,7 @@ infrastructure:
   project_id: cybuldeproject
   zone: europe-west4-a
   network: default
-data_parquet_path: gs://jmcybulde/data/processed/default_run/train.parquet
+data_parquet_path: gs://jmcybulde/data/processed/default_run/dev.parquet
 text_column_name: cleaned_text
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 6ac03ec6-b586-46cc-a2eb-01018476d8fd
+docker_image_tag: 6e165546-6da2-4801-bb09-61b2332d5f23

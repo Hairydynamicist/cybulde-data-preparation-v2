@@ -13,5 +13,5 @@ hydra:
   run:
     dir: .
 
-data_parquet_path: gs://jmcybulde/data/processed/default_run/train.parquet
+data_parquet_path: gs://jmcybulde/data/processed/default_run/dev.parquet
 text_column_name: cleaned_text
