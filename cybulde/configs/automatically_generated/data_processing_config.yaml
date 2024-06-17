@@ -66,13 +66,6 @@ dataset_cleaner_manager:
       _target_: cybulde.data_processing.dataset_cleaners.ReferanceToAccountDatasetCleaner
     re_tweet:
       _target_: cybulde.data_processing.dataset_cleaners.ReTweetDatasetCleaner
-    spell_correction:
-      _target_: cybulde.data_processing.dataset_cleaners.SpellCorrectionDatasetCleaner
-      spell_correction_model:
-        _target_: cybulde.utils.utils.SpellCorrectionModel
-        max_dictionary_edit_distance: 2
-        prefix_length: 7
-        count_threshold: 1
 dask_cluster:
   _target_: dask.distributed.LocalCluster
   n_workers: 2
@@ -93,5 +86,5 @@ dask_cluster:
 processed_data_save_dir: gs://jmcybulde/data/processed/default_run
 run_tag: default_run
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 0c3fd5e3-7502-4549-b6c6-98c51660e099
+docker_image_tag: 0ed77163-cc04-499f-bc8f-ed08b13b37cf
 min_nrof_words: 2

@@ -96,6 +96,26 @@ def save_config_as_yaml(config: Any, save_path: str) -> None:
         f.write(text_io.getvalue())
 
 
+def get_pickle_config(config_path: str, config_name: str) -> TaskFunction:
+    setup_config()
+    setup_logger()
+
+    def main_decorator(task_function: TaskFunction) -> Any:
+        def decorated_main() -> Any:
+            config = load_pickle_config(config_path, config_name)
+            return task_function(config)
+
+        return decorated_main
+
+    return main_decorator
+
+
+def load_pickle_config(config_path: str, config_name: str) -> Any:
+    with open_file(os.path.join(config_path, f"{config_name}.pickle"), "rb") as f:
+        config = pickle.load(f)
+    return config
+
+
 def save_config_as_pickle(config: Any, save_path: str) -> None:
     bytes_io = BytesIO()
     pickle.dump(config, bytes_io)

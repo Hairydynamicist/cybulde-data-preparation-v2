@@ -33,6 +33,8 @@ class DataProcessingConfig:
 
     min_nrof_words: int = 2
 
+    min_nrof_words: int = 2
+
 def setup_config() -> None:
     gcp_schema.setup_config()
     dataset_readers_schema.setup_config()
