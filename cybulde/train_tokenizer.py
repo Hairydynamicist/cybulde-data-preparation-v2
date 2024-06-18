@@ -24,8 +24,6 @@ def train_tokenizer(config: TokenizerTrainingConfig) -> None:
 
     tokenizer = instantiate(config.tokenizer, _convert_="all")
 
-    exit(0)
-
     logger.info("Reading dataset...")
     df = pd.read_parquet(data_parquet_path)
 

@@ -37,4 +37,4 @@ tokenizer:
   pad_token: '[PAD]'
   mask_token: '[MASK]'
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 1ff760d4-af2b-4325-bb6f-761b6f5d742a
+docker_image_tag: 474e8262-3c22-4ca7-b49c-fae60e3e43e5
