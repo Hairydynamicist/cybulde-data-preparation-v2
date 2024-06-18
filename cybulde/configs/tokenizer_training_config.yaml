@@ -1,7 +1,7 @@
 defaults:
   - tokenizer_training_config_schema
 
-#  - tokenizer: bpe_tokenizer
+  - tokenizer: bpe_tokenizer
 
   - override hydra/job_logging: custom
   - override hydra/hydra_logging: disabled
@@ -13,5 +13,5 @@ hydra:
   run:
     dir: .
 
-data_parquet_path: gs://jmcybulde/data/processed/default_run/dev.parquet
+data_parquet_path: gs://jmcybulde/data/processed/default_run/train.parquet
 text_column_name: cleaned_text

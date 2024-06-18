@@ -2,7 +2,39 @@ infrastructure:
   project_id: cybuldeproject
   zone: europe-west4-a
   network: default
-data_parquet_path: gs://jmcybulde/data/processed/default_run/dev.parquet
+data_parquet_path: gs://jmcybulde/data/processed/default_run/train.parquet
 text_column_name: cleaned_text
+tokenizer:
+  _target_: cybulde.tokenization.tokenizers.HuggingFaceTokenizer
+  pre_tokenizer:
+    _target_: tokenizers.pre_tokenizers.Whitespace
+  model:
+    _target_: tokenizers.models.BPE
+    vocab: null
+    merges: null
+    cache_capacity: 10000
+    dropout: null
+    unk_token: '[UNK]'
+    fuse_unk: false
+  trainer:
+    _target_: tokenizers.trainers.BpeTrainer
+    vocab_size: 30000
+    show_progress: true
+    min_frequency: 0
+    special_tokens:
+    - '[UNK]'
+    - '[CLS]'
+    - '[SEP]'
+    - '[PAD]'
+    - '[MASK]'
+    initial_alphabet: []
+  normalizer: null
+  decoder: null
+  post_processor: null
+  unk_token: '[UNK]'
+  cls_token: '[CLS]'
+  sep_token: '[SEP]'
+  pad_token: '[PAD]'
+  mask_token: '[MASK]'
 docker_image_name: europe-west4-docker.pkg.dev/cybuldeproject/cybulde/cybulde-data-processing
-docker_image_tag: 6e165546-6da2-4801-bb09-61b2332d5f23
+docker_image_tag: 1ff760d4-af2b-4325-bb6f-761b6f5d742a
